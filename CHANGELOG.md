@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [0.4.1](https://github.com/samanthaq/terraform-provider-circleci/compare/v0.4.0...v0.4.1) (2020-05-18)
+
+### Fixes
+
+* fix: repackage as samanthaq ([aad00f8e](https://github.com/samanthaq/terraform-provider-circleci/commit/aad00f8e))
+
 # [0.4.0](https://github.com/samanthaq/terraform-provider-circleci/compare/v0.3.0...v0.4.0) (2020-05-18)
 
 ### Features

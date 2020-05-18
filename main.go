@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/samanthaq/terraform-provider-circleci/circleci"
 	"github.com/hashicorp/terraform/plugin"
+	"github.com/samanthaq/terraform-provider-circleci/circleci"
 )
 
 func main() {

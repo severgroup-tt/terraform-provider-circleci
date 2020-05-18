@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/edahlseng/terraform-provider-circleci/circleci"
+	"github.com/samanthaq/terraform-provider-circleci/circleci"
 	"github.com/hashicorp/terraform/plugin"
 )
 

@@ -1,4 +1,4 @@
-module github.com/edahlseng/terraform-provider-circleci
+module github.com/samanthaq/terraform-provider-circleci
 
 go 1.12
 

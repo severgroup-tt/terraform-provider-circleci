@@ -2,7 +2,7 @@ package circleci
 
 import (
 	"fmt"
-	circleci "github.com/edahlseng/terraform-provider-circleci/circleci/circleci-go"
+	circleci "github.com/samanthaq/terraform-provider-circleci/circleci/circleci-go"
 	"github.com/hashicorp/terraform/helper/schema"
 )
 

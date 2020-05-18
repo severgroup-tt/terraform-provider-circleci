@@ -17,7 +17,7 @@ Or for a different version of the plugin, you can specify it through
 ```hcl
 provider "circleci" {
   # considering the CIRCLECI_TOKEN environment variable
-  version = "~>0.4.1"
+  version = "~>0.4.2"
 }
 ```
 

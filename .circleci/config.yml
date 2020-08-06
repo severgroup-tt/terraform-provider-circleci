@@ -3,7 +3,7 @@
 # Check https://circleci.com/docs/2.0/language-go/ for more details
 golang-docker-workspace: &golang-docker-workspace
   docker:
-    - image: circleci/golang:1.9
+    - image: circleci/golang:1.14
   working_directory: /go/src/github.com/samanthaq/terraform-provider-circleci
 
 version: 2
@@ -22,7 +22,18 @@ jobs:
       - checkout
       - run:
           name: Acceptance tests
-          command: make acctest
+          command: make testacc
       - run:
           name: Test sweepers
           command: make sweep
+
+workflows:
+  version: 2
+  build-test:
+    jobs:
+      - build:
+          context: CI_SETTINGS
+      - test:
+          context: CI_SETTINGS
+          requires:
+            - build

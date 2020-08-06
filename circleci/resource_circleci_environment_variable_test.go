@@ -93,7 +93,6 @@ func testAccCheckCircleCIEnvironmentVariableExists(rn string, envvar *circleci.E
 		if err != nil {
 			return err
 		}
-		fmt.Printf("got: %s\n", gotEnvvar)
 		*envvar = *gotEnvvar
 		return nil
 	}

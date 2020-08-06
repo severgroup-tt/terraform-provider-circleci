@@ -22,9 +22,9 @@ func TestAccCircleCIEnvironmentVariable_basic(t *testing.T) {
 	value := "fruitypebbles"
 
 	project := circleci.Project{
-		VcsType: "github",
+		VcsType:  "github",
 		Username: username,
-		Name: projectName,
+		Name:     projectName,
 	}
 	projectID := circleci.ProjectIdFromProject(project)
 
@@ -85,7 +85,7 @@ func testAccCheckCircleCIEnvironmentVariableExists(rn string, envvar *circleci.E
 
 		envvarInput := &circleci.EnvironmentVariable{
 			ProjectId: projectID,
-			Name: name,
+			Name:      name,
 		}
 
 		client := testAccProvider.Meta().(*circleci.Client)

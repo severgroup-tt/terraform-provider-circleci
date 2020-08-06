@@ -22,7 +22,7 @@ jobs:
       - checkout
       - run:
           name: Acceptance tests
-          command: make acctest
+          command: make testacc
       - run:
           name: Test sweepers
           command: make sweep

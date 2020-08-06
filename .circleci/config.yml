@@ -26,3 +26,14 @@ jobs:
       - run:
           name: Test sweepers
           command: make sweep
+
+workflows:
+  version: 2
+  build-test:
+    jobs:
+      - build:
+          context: CI_SETTINGS
+      - test:
+          context: CI_SETTINGS
+          requires:
+            - build

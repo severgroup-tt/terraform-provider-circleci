@@ -72,14 +72,14 @@ func testFixtureGithubRepository(name, org string) error {
 func testFixtureCircleCIProject(name, org string) error {
 	cciConfig := Config{
 		AuthToken: os.Getenv("CIRCLECI_TOKEN"),
-		BaseURL: os.Getenv("CIRCLECI_BASE_URL"),
+		BaseURL:   os.Getenv("CIRCLECI_BASE_URL"),
 	}
 	cciClient := cciConfig.NewClient()
 	// cciClient := testAccProvider.Meta().(*circleci.Client)
 	projectInput := &circleci.Project{
-		VcsType: "github",
+		VcsType:  "github",
 		Username: org,
-		Name: name,
+		Name:     name,
 	}
 	_, _, err := cciClient.Projects.Create(projectInput)
 	return err

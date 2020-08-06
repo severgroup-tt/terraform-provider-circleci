@@ -5,6 +5,8 @@ TF_PLUGINS_DIR?=$(HOME)/.terraform.d/plugins/$$(go env GOOS)_$$(go env GOARCH)
 TARGETS=darwin linux windows
 WEBSITE_REPO=github.com/hashicorp/terraform-website
 PKG_NAME=circleci
+SWEEP_RUN=circleci_project
+SWEEP_REGION=us
 
 default: build
 
@@ -28,6 +30,9 @@ test: fmtcheck
 
 testacc: fmtcheck
 	TF_ACC=1 go test $(TEST) -v $(TESTARGS) -timeout 120m
+
+sweep:
+	go test $(TEST) -v -sweep=$(SWEEP_REGION) -sweep-run=$(SWEEP_RUN)
 
 vet:
 	@echo "go vet ."

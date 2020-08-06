@@ -1,0 +1,28 @@
+# Golang CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-go/ for more details
+golang-docker-workspace: &golang-docker-workspace
+  docker:
+    - image: circleci/golang:1.9
+  working_directory: /go/src/github.com/samanthaq/terraform-provider-circleci
+
+version: 2
+jobs:
+  build:
+    <<: *golang-docker-workspace
+    steps:
+      - checkout
+      - run:
+          name: Build provider
+          command: make build
+
+  test:
+    <<: *golang-docker-workspace
+    steps:
+      - checkout
+      - run:
+          name: Acceptance tests
+          command: make acctest
+      - run:
+          name: Test sweepers
+          command: make sweep

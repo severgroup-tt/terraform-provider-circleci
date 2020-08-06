@@ -6,6 +6,11 @@ golang-docker-workspace: &golang-docker-workspace
     - image: circleci/golang:1.14
   working_directory: /go/src/github.com/samanthaq/terraform-provider-circleci
 
+python-docker-workspace: &python-docker-workspace
+  docker:
+    - image: circleci/python:3.8
+  working_directory: /tmp/workspace
+
 version: 2
 jobs:
   build:
@@ -27,13 +32,79 @@ jobs:
           name: Test sweepers
           command: make sweep
 
+  tag-test:
+    <<: *python-docker-workspace
+    steps:
+      - checkout:
+          path: /tmp/workspace
+      - run:
+          name: Install commitizen
+          command: |
+            pip3 install --user --upgrade --upgrade-strategy eager commitizen==2.1.0
+      - run:
+          name: Test that creating new Git tag works
+          command: |
+            git config --global user.email "svc_ci_iaa@mckinsey.com"
+            git config --global user.name "svc-ci-iaa"
+            cz bump --yes
+
+  tag:
+    <<: *python-docker-workspace
+    steps:
+      - checkout:
+          path: /tmp/workspace
+      - add_ssh_keys:
+          fingerprints:
+            - "d2:23:2b:12:c7:50:a6:cf:ea:ea:c3:25:b0:ae:23:cf"
+      - run:
+          name: Delete all existing ssh-agent keys
+          command: ssh-add -D
+      - run:
+          name: Configure ssh-agent keys
+          command: |
+            ssh-add $HOME/.ssh/id_rsa_*
+            ssh-add -l -E md5
+            env | grep SSH_AUTH_SOCK
+      - run:
+          name: Install commitizen
+          command: |
+            pip3 install --user --upgrade --upgrade-strategy eager commitizen==2.1.0
+      - run:
+          name: Create new Git tag
+          command: |
+            git config --global user.email "svc_ci_iaa@mckinsey.com"
+            git config --global user.name "svc-ci-iaa"
+            cz bump --yes
+            git push origin && git push origin --tags
+
+# Default workflow filter to trigger on master branch
+filter_master: &filter_master
+  branches:
+    only:
+      - master
+
+# Default workflow filter to trigger on PR
+filter_PR: &filter_PR
+  branches:
+    ignore:
+      - master
+
 workflows:
   version: 2
-  build-test:
+  build-test-tag:
     jobs:
+      - tag-test:
+          filters:
+            <<: *filter_PR
       - build:
-          context: CI_SETTINGS
+          filters:
+            <<: *filter_PR
       - test:
           context: CI_SETTINGS
           requires:
             - build
+          filters:
+            <<: *filter_PR
+      - tag:
+          filters:
+            <<: *filter_master

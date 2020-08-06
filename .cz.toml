@@ -1,0 +1,10 @@
+[tool.commitizen]
+name = "cz_conventional_commits"
+version = "0.4.2"
+tag_format = "v$version"
+version_files = [
+    "GNUmakefile:VERSION",
+    "package.json:version",
+    "README.md:version"
+]
+bump_message = "release $current_version → $new_version [skip ci]"

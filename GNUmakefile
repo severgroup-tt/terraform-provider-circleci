@@ -1,6 +1,6 @@
 TEST?=$$(go list ./... |grep -v 'vendor')
 GOFMT_FILES?=$$(find . -name '*.go' |grep -v vendor)
-VERSION?=0.6.4
+VERSION?=0.6.5
 TF_PLUGINS_DIR?=$(HOME)/.terraform.d/plugins/$$(go env GOOS)_$$(go env GOARCH)
 TARGETS=darwin linux windows
 WEBSITE_REPO=github.com/hashicorp/terraform-website

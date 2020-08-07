@@ -77,6 +77,18 @@ jobs:
             cz bump --yes
             git push origin && git push origin --tags
 
+  publish:
+    <<: *golang-docker-workspace
+    steps:
+      - checkout
+      - run:
+          name: Install goreleaser
+          command: go get github.com/goreleaser/goreleaser
+      - run:
+          name: Publish terraform artifacts
+          command: |
+            goreleaser release
+
 # Default workflow filter to trigger on master branch
 filter_master: &filter_master
   branches:
@@ -89,9 +101,16 @@ filter_PR: &filter_PR
     ignore:
       - master
 
+# Default workflow filter to trigger on tagged version
+filter_version_tag: &filter_version_tag
+  tags:
+    only: /^v.*/
+  branches:
+    ignore: /.*/
+
 workflows:
   version: 2
-  build-test-tag:
+  build-test-publish:
     jobs:
       - tag-test:
           filters:
@@ -108,3 +127,7 @@ workflows:
       - tag:
           filters:
             <<: *filter_master
+      - publish:
+          context: CI_SETTINGS
+          filters:
+            <<: *filter_version_tag

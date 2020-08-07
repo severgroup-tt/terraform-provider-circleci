@@ -19,6 +19,6 @@ checksum:
 snapshot:
   name_template: "{{ .Tag }}-next"
 github_urls:
-  api: git.mckinsey-solutions.com
-  upload: git.mckinsey-solutions.com
-  download: git.mckinsey-solutions.com
+  api: https://git.mckinsey-solutions.com/api/v3/
+  upload: https://git.mckinsey-solutions.com/api/v3/upload/
+  download: https://git.mckinsey-solutions.com/

@@ -20,5 +20,5 @@ snapshot:
   name_template: "{{ .Tag }}-next"
 github_urls:
   api: https://git.mckinsey-solutions.com/api/v3/
-  upload: https://git.mckinsey-solutions.com/api/v3/
+  upload: https://git.mckinsey-solutions.com/api/uploads/
   download: https://git.mckinsey-solutions.com/

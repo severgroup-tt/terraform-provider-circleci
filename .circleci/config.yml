@@ -87,7 +87,7 @@ jobs:
       - run:
           name: Publish terraform artifacts
           command: |
-            goreleaser release
+            goreleaser release --skip-validate
 
 # Default workflow filter to trigger on master branch
 filter_master: &filter_master

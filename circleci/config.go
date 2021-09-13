@@ -1,7 +1,7 @@
 package circleci
 
 import (
-	circleci "github.com/samanthaq/terraform-provider-circleci/circleci/circleci-go"
+	circleci "github.com/severgroup-tt/terraform-provider-circleci/circleci/circleci-go"
 )
 
 type Config struct {

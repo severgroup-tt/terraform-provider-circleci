@@ -11,7 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/helper/acctest"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/terraform"
-	circleci "github.com/samanthaq/terraform-provider-circleci/circleci/circleci-go"
+	circleci "github.com/severgroup-tt/terraform-provider-circleci/circleci/circleci-go"
 )
 
 func init() {

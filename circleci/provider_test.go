@@ -9,7 +9,7 @@ import (
 	"github.com/google/go-github/v32/github"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/terraform"
-	circleci "github.com/samanthaq/terraform-provider-circleci/circleci/circleci-go"
+	circleci "github.com/severgroup-tt/terraform-provider-circleci/circleci/circleci-go"
 	"golang.org/x/oauth2"
 )
 

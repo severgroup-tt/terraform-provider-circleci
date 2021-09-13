@@ -2,7 +2,7 @@ TEST?=$$(go list ./... |grep -v 'vendor')
 GOFMT_FILES?=$$(find . -name '*.go' |grep -v vendor)
 VERSION?=0.6.5
 TF_PLUGINS_DIR?=$(HOME)/.terraform.d/plugins/$$(go env GOOS)_$$(go env GOARCH)
-TARGETS=darwin linux windows
+TARGETS=darwin_amd64 darwin_arm64 linux_amd64 windows_amd64
 WEBSITE_REPO=github.com/hashicorp/terraform-website
 PKG_NAME=circleci
 SWEEP_RUN=circleci_project
@@ -20,8 +20,8 @@ install: build
 targets: $(TARGETS)
 
 $(TARGETS):
-	GOOS=$@ GOARCH=amd64 CGO_ENABLED=0 go build -o "dist/terraform-provider-circleci_$$(git describe --tags)_$@_amd64"
-	zip -j dist/terraform-provider-circleci_$$(git describe --tags)_$@_amd64.zip dist/terraform-provider-circleci_$$(git describe --tags)_$@_amd64
+	GOOS=$(firstword $(subst _, ,$@)) GOARCH=$(lastword $(subst _, ,$@)) CGO_ENABLED=0 go build -o "dist/terraform-provider-circleci_$$(git describe --tags)_$@"
+	zip -j dist/terraform-provider-circleci_$$(git describe --tags)_$@.zip dist/terraform-provider-circleci_$$(git describe --tags)_$@
 
 test: fmtcheck
 	go test -i $(TEST) || exit 1
